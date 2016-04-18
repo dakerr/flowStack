@@ -1,0 +1,10 @@
+{
+  "browser": true,
+  "globals": {
+    "angular": false,
+    "_": false,
+    "console": false,
+    "chance": false,
+    "moment": false
+  }
+}

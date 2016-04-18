@@ -1,0 +1,30 @@
+#vertical-container {
+  width: 100%;
+  max-width: 400px; 
+  min-height: 300px;
+}
+
+.repeated-item {
+  border-bottom: 1px dotted lightgrey;
+  box-sizing: border-box;
+  height: 50px;
+  overflow: hidden;
+
+}
+
+md-content {
+  padding: 16px;
+}
+
+md-virtual-repeat-container {
+  border: solid 1px lightgrey; 
+}
+
+.md-virtual-repeat-container .md-virtual-repeat-offsetter div {
+  padding-left: 16px;
+  padding-right: 16px; 
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}

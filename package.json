@@ -1,0 +1,19 @@
+{
+  "name": "flow-stack",
+  "version": "0.0.1",
+  "description": "An experiment with Angular Material",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dakerr/flowStack.git"
+  },
+  "author": "David Kerr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dakerr/flowStack/issues"
+  },
+  "homepage": "https://github.com/dakerr/flowStack#readme"
+}
