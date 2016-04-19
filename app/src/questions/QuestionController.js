@@ -8,7 +8,7 @@
           return _.unescape(str);
         };
       })
-      .controller('QuestionCtrl', function(questionService, $timeout, $scope, $window) {
+      .controller('QuestionCtrl', function(questionService, $timeout, $scope, $window, $mdSidenav) {
         var self = this;
 
         self.HEIGHT_OFFSET = 64;
@@ -76,6 +76,7 @@
       
         this.toggleLeft = function() {
           $mdSidenav('left').toggle();
+          onResize();
         }
 
         this.listStyle = {
