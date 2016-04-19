@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dakerr/flowStack/issues"
   },
-  "homepage": "https://github.com/dakerr/flowStack#readme"
+  "homepage": "https://github.com/dakerr/flowStack#readme",
+  "dependencies": {
+    "material-design-icons": "^2.2.3"
+  }
 }

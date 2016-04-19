@@ -11,6 +11,8 @@
       .controller('QuestionCtrl', function(questionService, $timeout, $scope, $window) {
         var self = this;
 
+        self.HEIGHT_OFFSET = 64;
+
         // In this example, we set up our model using a class.
         // Using a plain object works too. All that matters
         // is that we implement getItemAtIndex and getLength.
@@ -27,6 +29,7 @@
           this.PAGE_SIZE = 50;
 
           this.fetchNumItems_();
+
         };
 
         // Required.
@@ -55,8 +58,9 @@
           //   this.loadedPages[pageNumber] = _.concat([], res.data.items);
           // }));
           questionService.fetchMockQuestions().then(angular.bind(this, function(res){
-            console.log('res',res);
-            this.loadedPages[pageNumber] = _.concat([], res.data.items);
+            this.loadedPages[pageNumber] = _.map(res.data.items, function(el) { 
+              return _.extend({}, el, {visible: false});
+            });
           }));
 
         };
@@ -70,17 +74,24 @@
           }));
         };
       
+        this.toggleLeft = function() {
+          $mdSidenav('left').toggle();
+        }
+
         this.listStyle = {
-          height: ($window.innerHeight - 32) + 'px'
+          height: ($window.innerHeight - this.HEIGHT_OFFSET) + 'px'
         };
+
+        this.toggle = function(item) {
+          item.visible = !item.visible;
+          console.log('clicked', item);
+        }
 
         $window.addEventListener('resize', onResize);
         function onResize() {
-          self.listStyle.height = ($window.innerHeight - 32) + 'px';
+          self.listStyle.height = ($window.innerHeight - self.HEIGHT_OFFSET) + 'px';
           if (!$scope.$root.$$phase) $scope.$digest();
         }
-
-        this._ = _;
 
         this.dynamicItems = new DynamicItems();
       });

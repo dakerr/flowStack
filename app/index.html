@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <!-- Angular Material CSS now available via Google CDN; version 0.9.4 used here -->
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="assets/app.css"/>
 
     <style type="text/css">
@@ -24,22 +25,48 @@
 
   </head>
 
-  <body ng-app="flowStack" ng-controller="QuestionCtrl as ctrl" ng-cloak>
+  <body ng-app="flowStack" layout="row" ng-controller="QuestionCtrl as ctrl" ng-cloak>
 
-    <md-content layout="column">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z3"
+        md-component-id="left"
+        md-is-locked-open="$mdMedia('gt-sm')">
+
+      <md-toolbar class="md-whiteframe-z1">
+        <h3>Questions</h3>
+      </md-toolbar>
+
       <md-virtual-repeat-container id="vertical-container" ng-style="ctrl.listStyle">
         <div md-virtual-repeat="item in ctrl.dynamicItems" md-on-demand="" class="repeated-item" flex="">
-          {{ item.title | unescape }}
+
+          <md-list-item class="md-3-line" ng-click="ctrl.toggle(item)" layout="row">
+            <div class="md-list-item-text" layout="column">
+              <h4>{{ item.tags[0] }}</h4>
+              <p>{{ item.title | unescape }}</p>
+              <p ng-if="item.visible">answers: {{item.answer_count}}</p>
+            </div>
+            <i class="material-icons">keyboard_arrow_down</i>
+            
+          </md-list-item>
+
         </div>
       </md-virtual-repeat-container>
-    </md-content>
+    </md-sidenav>
+
+    <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+      <md-toolbar layout="row" class="md-whiteframe-z1">
+        <md-button id="main" class="menu" ng-click="ctrl.toggleLeft()" hide-gt-sm aria-label="Show User List">
+          <md-icon md-svg-icon="menu" ></md-icon>
+        </md-button>
+      </md-toolbar>
+      <md-content flex id="content"></md-content>
+    </div>
 
     <!-- Angular Material Dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.9.4 used here -->
@@ -54,7 +81,16 @@
     <script type="text/javascript">
       angular
         .module('flowStack', ['ngMaterial', 'questions'])
-        .constant('_', window._);
+        .constant('_', window._)
+        .config(function($mdThemingProvider, $mdIconProvider) {
+
+          $mdIconProvider
+            .icon("menu", "./assets/svg/menu.svg", 24);
+
+          $mdThemingProvider.theme('default')
+            .primaryPalette('blue-grey')
+            .accentPalette('amber')
+        });
     </script>
   </body>
 </html>
